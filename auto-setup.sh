@@ -5,6 +5,10 @@
 sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
 sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable -y
 sudo add-apt-repository ppa:dlech/keepass2-plugins -y
+sudo add-apt-repository ppa:webupd8team/atom -y
+sudo add-apt-repository ppa:webupd8team/java -y
+sudo add-apt-repository ppa:webupd8team/y-ppa-manager -y
+sudo add-apt-repository ppa:webupd8team/tor-browser -y
 sudo apt update
 
 # install tools
