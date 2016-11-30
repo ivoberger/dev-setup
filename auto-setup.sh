@@ -26,17 +26,13 @@ sudo apt install git cmake golang atom oracle-java8-installer oracle-java8-set-d
     mkdir $GOPATH/bin
     mkdir $GOPATH/src
     mkdir $GOPATH/lib
-    mkdir -p $GOPATH/src/github.com/IIIuminator
-    mkdir -p $GOPATH/src/gitlab.com/illuminator
-    mkdir -p $GOPATH/src/bitbucket.com/illuminatos
-    mkdir -p $GOPATH/src/git.sit.fraunhofer.de/iberger
 
     cp /etc/skel/.profile $HOME/.profile
     echo 'export GOPATH=$HOME/Documents/go' >> $HOME/.profile
     echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.profile
 
 # media
-sudo apt install vlc* -y
+sudo apt install vlc* plasma-applet-redshift-control -y
 
 # internet
 sudo apt install tor-browser owncloud-client google-chrome-stable -y
