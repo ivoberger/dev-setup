@@ -1,4 +1,14 @@
-yaourt -Syyua --noconfirm
-sudo pacman -S --noconfirm --needed texmaker texlive-most keepass keepass-plugin-keeagent evolution evolution-ews gimp scribus synergy go-tools gnome-disk-utility gnome-keyring libgnome-keyring redshift bash-completion gutenprint filezilla
-yaourt -S --noconfirm --needed google-chrome intellij-idea-ultimate-edition keepass-plugin-http telegram-desktop-bin keebuntu gogland jdk visual-studio-code nextcloud-client grub-customizer gigolo skypeforlinux-bin gitkraken gputest mprime
-yaourt -Qdt --noconfirm
+# System Update
+yaourt -Syyua --noconfirm  
+# Internet
+yaourt -S --noconfirm --needed google-chrome evolution evolution-ews telegram-desktop-bin nextcloud-client skypeforlinux-bin
+# Office
+yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus
+# Development
+yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland visual-studio-code jdk go-tools gitkraken filezilla
+# Tools
+yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gputest mprime gnome-disk-utility synergy 
+# Miscelanues
+yaourt -S --noconfirm --needed gutenprint redshift bash-completion gnome-keyring libgnome-keyring 
+# Cleanup
+yaourt -Qdt
