@@ -1,4 +1,5 @@
-yaourt -Syyua --noconfirm  
+#! /bin/bash
+yaourt -Syyua --noconfirm
 # Internet
 yaourt -S --noconfirm google-chrome evolution evolution-ews telegram-desktop-bin nextcloud-client skypeforlinux-bin
 # Office
