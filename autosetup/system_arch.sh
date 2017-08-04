@@ -15,6 +15,8 @@ yaourt -S --noconfirm keepass keepass-plugin-keeagent keepass-plugin-http keebun
 yaourt -S --noconfirm redshift bash-completion gpmdp net-snmp
 # Cleanup
 sudo pacman -R konversation jdk8-openjdk jdk8-openjdk-headless xine kwrite openvpn samba smbclient
+
+bash keepassXhttp.sh
 yaourt -Qdt
 
 # autostarts
