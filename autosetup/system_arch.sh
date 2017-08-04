@@ -10,7 +10,7 @@ yaourt -S --noconfirm texmaker texlive-most gimp scribus okular
 yaourt -S --noconfirm intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
 yaourt -S --noconfirm jdk go-tools gitkraken python2-pip python-pip
 # Tools
-yaourt -S --noconfirm grub-customizer gigolo gnome-disk-utility synergy 
+yaourt -S --noconfirm ksshaskpass grub-customizer gigolo gnome-disk-utility synergy 
 # Miscellaneous
 yaourt -S --noconfirm redshift bash-completion gpmdp net-snmp
 # Cleanup
