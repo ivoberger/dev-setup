@@ -6,16 +6,16 @@ sudo pacman -Syyu --noconfirm
 # System
 sudo pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168
 # Internet
-yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin
+yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin &
 # Office
-yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular
-# Development
-yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
-yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip
+yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular &
 # Tools
-yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip
+yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip &
 # Miscellaneous
-yaourt -S --noconfirm --needed redshift bash-completion gpmdp
+yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
+# Development
+yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip &
+yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
 # Cleanup
 yaourt -Qdt
 
