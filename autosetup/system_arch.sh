@@ -4,17 +4,17 @@ sudo pacman -Rsn --noconfirm konversation jre8-openjdk jdk8-openjdk kwrite samba
 # Full system upgrade
 sudo pacman -Syyu --noconfirm
 # System
-sudo konsole -e pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168
+sudo konsole -e pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168 &
 # Internet
-konsole -e yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin
+konsole -e yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin &
 # Office
-konsole -e yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular
+konsole -e yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular &
 # Tools
-konsole -e yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip
+konsole -e yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip &
 # Miscellaneous
-konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp
+konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
 # Development
-konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip
+konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip &
 konsole -e yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
 
 konsole -e bash keepassXhttp.sh
