@@ -1,5 +1,5 @@
 #! /bin/bash
-sudo pacman -S --noconfirm qt5-base qt5-tools qt5-x11extras qjson libmicrohttpd libgcrypt zlib libxi libxtst curl cmake make gcc-multilib
+sudo pacman -S --noconfirm --needed qt5-base qt5-tools qt5-x11extras qjson libmicrohttpd libgcrypt zlib libxi libxtst curl cmake make gcc-multilib
 git clone https://github.com/Ivan0xFF/keepassx.git /tmp/keepassx
 mkdir -p /tmp/keepassx/build
 cd /tmp/keepassx/build

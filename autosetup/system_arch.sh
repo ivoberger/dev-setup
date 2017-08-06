@@ -10,7 +10,7 @@ konsole -e yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nex
 # Office
 konsole -e yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular &
 # Tools
-konsole -e yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip &
+konsole -e yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip &
 # Miscellaneous
 konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
 # Development
