@@ -1,23 +1,23 @@
 #! /bin/bash
-sudo pacman -Syyua --noconfirm
+# Removing unwanted preinstalled software (manjaro)
+sudo pacman -Rsn --noconfirm konversation jre8-openjdk jdk8-openjdk kwrite samba cantata steam-manjaro krita inkscape skanlite gwenview kdenetwork-kget k3b kdenlive manjaro-hello manjaro-documentation-en
+# Full system upgrade
+sudo pacman -Syyu --noconfirm
 # System
-sudo pacman -S linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168
+sudo pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168
 # Internet
-yaourt -S --noconfirm google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin
+yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin
 # Office
-yaourt -S --noconfirm texmaker texlive-most gimp scribus okular
+yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular
 # Development
-yaourt -S --noconfirm intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
-yaourt -S --noconfirm jdk go-tools gitkraken python2-pip python-pip
+yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
+yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip
 # Tools
-yaourt -S --noconfirm ksshaskpass grub-customizer gigolo gnome-disk-utility synergy 
+yaourt -S --noconfirm --needed keepass keepass-plugin-keeagent keepass-plugin-http keebuntu grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip
 # Miscellaneous
-yaourt -S --noconfirm redshift bash-completion gpmdp net-snmp
+yaourt -S --noconfirm --needed redshift bash-completion gpmdp
 # Cleanup
-sudo pacman -R konversation jdk8-openjdk jdk8-openjdk-headless xine kwrite openvpn samba smbclient
+yaourt -Qdt
 
 bash keepassXhttp.sh
 yaourt -Qdt
-
-# autostarts
-#ln -s ../autostart/keepass_autostart.sh ~/.config/autostart-scripts/keepass_autostart.sh
