@@ -14,8 +14,9 @@ konsole -e yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-util
 # Miscellaneous
 konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
 # Development
-konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip &
+konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip android-sdk &
 konsole -e yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
 
+sudo chmod a+rw /opt/android-sdk
 konsole -e bash keepassXhttp.sh
 yaourt -Qdt
