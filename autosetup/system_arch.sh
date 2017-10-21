@@ -2,22 +2,21 @@
 # Removing unwanted preinstalled software (manjaro)
 sudo pacman -Rsn --noconfirm konversation jre8-openjdk jdk8-openjdk kwrite samba cantata steam-manjaro krita inkscape skanlite gwenview kdenetwork-kget k3b kdenlive manjaro-hello manjaro-documentation-en
 # Full system upgrade
-sudo pacman -Syyu --noconfirm
+sudo pacman -Syu --noconfirm
 # System
-sudo konsole -e pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux412 linux412-nvidia linux412-r8168 &
+sudo pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux414 linux414-nvidia linux414-r8168
 # Internet
-konsole -e yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client skypeforlinux-bin &
+yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client
 # Office
-konsole -e yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular &
+yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular
 # Tools
-konsole -e yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-utility synergy xnviewmp unzip &
+yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-utility synergy2-bin unzip
 # Miscellaneous
-konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
+yaourt -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-completion gpmdp
 # Development
-konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip android-sdk &
-konsole -e yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
-konsole -e yaourt -S --noconfirm --needed ros-kinetic-desktop-full octave qtcreator qtcreator-ros-git
+yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip android-sdk &
+yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
 
 sudo chmod a+rw /opt/android-sdk -R
-konsole -e bash keepassXhttp.sh
+bash keepassXhttp.sh
 yaourt -Qdt
