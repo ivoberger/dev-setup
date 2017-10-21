@@ -16,6 +16,7 @@ konsole -e yaourt -S --noconfirm --needed redshift bash-completion gpmdp &
 # Development
 konsole -e yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip android-sdk &
 konsole -e yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
+konsole -e yaourt -S --noconfirm --needed ros-kinetic-desktop-full octave qtcreator qtcreator-ros-git
 
 sudo chmod a+rw /opt/android-sdk -R
 konsole -e bash keepassXhttp.sh
