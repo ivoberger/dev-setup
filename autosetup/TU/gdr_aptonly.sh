@@ -9,3 +9,4 @@ sudo apt update
 sudo apt install -y ros-kinetic-desktop qt59creator qt57creator-plugin-ros
 
 sudo apt install -y octave octave-doc gnuplot
+sudo apt install -y git cmake
