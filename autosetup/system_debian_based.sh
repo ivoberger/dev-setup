@@ -9,9 +9,6 @@ sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 sudo add-apt-repository ppa:nextcloud-devs/client -y
 sudo add-apt-repository ppa:mozillateam/firefox-next -y
 
-sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb apps" > /etc/apt/sources.list.d/getdeb.list'
-wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
-
 sudo apt update
 
 sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
