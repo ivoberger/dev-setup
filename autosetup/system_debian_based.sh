@@ -17,6 +17,12 @@ sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
 sudo apt install keepassx -y
 sudo apt install vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus -y
 
+if [[ `uname -a` == *"Ubuntu"* ]]; then
+  sudo add-apt-repository ppa:snwh/pulp -y
+  sudo apt update
+  sudo apt install -y unity-tweak-tool paper-gtk-theme paper-icon-theme
+fi
+
 # set up development environment
     #golang Setup
     mkdir $HOME/go
