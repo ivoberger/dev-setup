@@ -18,9 +18,9 @@ sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
 
 # install tools
 sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio
-sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc
+sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc libsecret-tools
 
-if [[ $1 == "ubuntu" ]]; then
+if [[ $1 == "unity" ]]; then
   sudo apt install -y unity-tweak-tool
 fi
 
@@ -49,6 +49,11 @@ wget https://github.com/downloads/maoserr/redshiftgui/RedshiftGUI-0.2.1-Linux-x8
 sudo dpkg -i *.deb
 rm *.deb
 
+# upgrade packages
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+
 sudo snap install intellij-idea-ultimate --classic
 sudo snap install pycharm-professional --classic
 sudo snap install atom --classic
@@ -60,8 +65,3 @@ if [[ $2 == "gdr" ]]; then
   chmod +x TU/gdr_aptonly.sh
   TU/gdr_aptonly.sh
 fi
-
-# upgrade packages
-sudo apt upgrade -y
-sudo apt dist-upgrade -y
-sudo apt autoremove -y

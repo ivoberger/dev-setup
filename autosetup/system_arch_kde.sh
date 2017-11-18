@@ -8,15 +8,12 @@ sudo pacman -S --noconfirm --needed linux49 linux49-nvidia linux49-r8168 linux41
 # Internet
 yaourt -S --noconfirm --needed google-chrome telegram-desktop-bin nextcloud-client
 # Office
-yaourt -S --noconfirm --needed texmaker texlive-most gimp scribus okular
+yaourt -S --noconfirm --needed texmaker texlive-most gimp
 # Tools
-yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-utility synergy2-bin unzip
+yaourt -S --noconfirm --needed grub-customizer gigolo gnome-disk-utility synergy2 unzip keepassxc
 # Miscellaneous
 yaourt -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-completion gpmdp
 # Development
-yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip android-sdk &
+yaourt -S --noconfirm --needed jdk go-tools python2-pip python-pip
 yaourt -S --noconfirm --needed intellij-idea-ultimate-edition pycharm-professional gogland android-studio atom
-
-sudo chmod a+rw /opt/android-sdk -R
-bash keepassXhttp.sh
 yaourt -Qdt
