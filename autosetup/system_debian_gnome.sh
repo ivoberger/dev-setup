@@ -11,6 +11,7 @@ sudo add-apt-repository ppa:mozillateam/firefox-next -y
 sudo add-apt-repository ppa:maarten-fonville/android-studio -y
 sudo add-apt-repository ppa:snwh/pulp -y
 sudo add-apt-repository ppa:phoerious/keepassxc -y
+sudo add-apt-repository ppa:atareao/telegram -y
 
 sudo apt update
 
@@ -18,7 +19,7 @@ sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
 
 # install tools
 sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio
-sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc libsecret-tools
+sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc libsecret-tools telegram
 
 if [[ $1 == "unity" ]]; then
   sudo apt install -y unity-tweak-tool
@@ -58,7 +59,6 @@ sudo snap install intellij-idea-ultimate --classic
 sudo snap install pycharm-professional --classic
 sudo snap install atom --classic
 sudo snap install go --classic
-sudo snap install telegram-sergiusens
 
 # gdr
 if [[ $2 == "gdr" ]]; then
