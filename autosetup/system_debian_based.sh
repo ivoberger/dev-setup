@@ -8,32 +8,38 @@ sudo add-apt-repository ppa:webupd8team/java -y
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 sudo add-apt-repository ppa:nextcloud-devs/client -y
 sudo add-apt-repository ppa:mozillateam/firefox-next -y
+sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+sudo add-apt-repository ppa:snwh/pulp -y
+sudo add-apt-repository ppa:phoerious/keepassxc -y
 
 sudo apt update
 
 sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
 
 # install tools
-sudo apt install keepassx -y
-sudo apt install vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus -y
+sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio
+sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc
 
-if [[ `uname -a` == *"Ubuntu"* ]]; then
-  sudo add-apt-repository ppa:snwh/pulp -y
-  sudo apt update
-  sudo apt install -y unity-tweak-tool paper-gtk-theme paper-icon-theme
+if [[ $1 == "ubuntu" ]]; then
+  sudo apt install -y unity-tweak-tool
 fi
 
 # set up development environment
-    #golang Setup
-    mkdir $HOME/go
-    export GOPATH=$HOMEgo
-    mkdir $GOPATH/bin
-    mkdir $GOPATH/src
-    mkdir $GOPATH/lib
+#golang Setup
+mkdir $HOME/go
+export GOPATH=$HOME/go
+mkdir $GOPATH/bin
+mkdir $GOPATH/src
+mkdir $GOPATH/lib
 
-    cp /etc/skel/.profile $HOME/.profile
-    echo 'export GOPATH=$HOME/go' >> $HOME/.profile
-    echo 'export PATH=$PATH:$GOPATH/bin' >> $HOME/.profile
+LINE="# Golang setup"
+FILE=$HOME/.bashrc
+if ! grep -qxF "$LINE" "$FILE"; then
+  echo "Adding GOPATH to $FILE"
+  echo "$LINE" >> $FILE
+  echo 'export GOPATH=$HOME/go ' >> $FILE
+  echo 'export PATH=$PATH:$GOPATH/bin' >> $FILE
+fi
 
 cd /tmp
 wget https://binaries.symless.com/v2.0.1/synergy_2.0.1.stable-b1034%2B59dd93a0_amd64.deb
@@ -46,16 +52,14 @@ rm *.deb
 sudo snap install intellij-idea-ultimate --classic
 sudo snap install pycharm-professional --classic
 sudo snap install atom --classic
-sudo snap install ubuntu-make --classic
-sudo snap install telegram-latest
-
-ubuntu-make.umake ide eclipse
-ubuntu-make.umake ide gogland --eap
-ubuntu-make.umake android android-studio
+sudo snap install go --classic
+sudo snap install telegram-sergiusens
 
 # gdr
-chmod +x TU/gdr_aptonly.sh
-TU/gdr_aptonly.sh
+if [[ $2 == "gdr" ]]; then
+  chmod +x TU/gdr_aptonly.sh
+  TU/gdr_aptonly.sh
+fi
 
 # upgrade packages
 sudo apt upgrade -y
