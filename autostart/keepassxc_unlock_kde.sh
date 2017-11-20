@@ -1,3 +1,5 @@
 #!/bin/bash
-dbpath=~/Nextcloud/Software/MainDB.kdbx
-kwallet-query kdewallet -r KeePass | keepassxc --pw-stdin $dbpath
+dbpath=~/Nextcloud/Software/
+dbname=MainDB.kdbx
+rm $dbpath.$dbname.lock
+kwallet-query kdewallet -r KeePass | keepassxc --pw-stdin $dbpath$dbname
