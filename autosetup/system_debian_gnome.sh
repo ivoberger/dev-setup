@@ -1,5 +1,5 @@
 #!/bin/bash
-# Auto Setup Script for debian-based Linux Distributions
+# Auto Setup Script for Ubuntu Linux Distributions
 
 # add Repositories
 sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
@@ -12,18 +12,24 @@ sudo add-apt-repository ppa:maarten-fonville/android-studio -y
 sudo add-apt-repository ppa:snwh/pulp -y
 sudo add-apt-repository ppa:phoerious/keepassxc -y
 sudo add-apt-repository ppa:atareao/telegram -y
+sudo add-apt-repository ppa:webupd8team/atom -y
+sudo add-apt-repository ppa:longsleep/golang-backports -y
+sudo add-apt-repository ppa:viktor-krivak/pycharm -y
+sudo add-apt-repository ppa:ubuntuhandbook1/apps -y
+
+sudo sh -c "echo 'deb http://ppa.launchpad.net/viktor-krivak/pycharm/ubuntu zesty main' > /etc/apt/sources.list.d/viktor-krivak-ubuntu-pycharm-xenial.list"
 
 sudo apt update
+
+# upgrade packages
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
 
 sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
 
 # install tools
-sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio
+sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio pycharm-professional intellij-idea-ultimate atom golang-go unity-tweak-tool
 sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc libsecret-tools telegram
-
-if [[ $1 == "unity" ]]; then
-  sudo apt install -y unity-tweak-tool
-fi
 
 # set up development environment
 #golang Setup
@@ -50,18 +56,11 @@ wget https://github.com/downloads/maoserr/redshiftgui/RedshiftGUI-0.2.1-Linux-x8
 sudo dpkg -i *.deb
 rm *.deb
 
-# upgrade packages
-sudo apt upgrade -y
-sudo apt dist-upgrade -y
+sudo apt install -f -y
 sudo apt autoremove -y
 
-sudo snap install intellij-idea-ultimate --classic
-sudo snap install pycharm-professional --classic
-sudo snap install atom --classic
-sudo snap install go --classic
-
 # gdr
-if [[ $2 == "gdr" ]]; then
+if [[ $1 == "gdr" ]]; then
   chmod +x TU/gdr_aptonly.sh
   TU/gdr_aptonly.sh
 fi
