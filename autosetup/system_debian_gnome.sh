@@ -22,6 +22,7 @@ sudo sh -c "echo 'deb http://ppa.launchpad.net/viktor-krivak/pycharm/ubuntu zest
 sudo apt update
 
 # upgrade packages
+sudo apt remove -y apport thunderbird*
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
@@ -52,15 +53,8 @@ cd /tmp
 wget https://binaries.symless.com/v2.0.1/synergy_2.0.1.stable-b1034%2B59dd93a0_amd64.deb
 wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
 wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.17.11-stable_amd64.deb
-wget https://github.com/downloads/maoserr/redshiftgui/RedshiftGUI-0.2.1-Linux-x86_64.deb
 sudo dpkg -i *.deb
 rm *.deb
 
 sudo apt install -f -y
 sudo apt autoremove -y
-
-# gdr
-if [[ $1 == "gdr" ]]; then
-  chmod +x TU/gdr_aptonly.sh
-  TU/gdr_aptonly.sh
-fi
