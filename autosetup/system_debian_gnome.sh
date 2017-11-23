@@ -7,7 +7,6 @@ sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable -y
 sudo add-apt-repository ppa:webupd8team/java -y
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y
 sudo add-apt-repository ppa:nextcloud-devs/client -y
-sudo add-apt-repository ppa:mozillateam/firefox-next -y
 sudo add-apt-repository ppa:maarten-fonville/android-studio -y
 sudo add-apt-repository ppa:snwh/pulp -y
 sudo add-apt-repository ppa:phoerious/keepassxc -y
@@ -26,10 +25,13 @@ sudo apt remove -y apport thunderbird*
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
-sudo apt install git cmake oracle-java8-installer oracle-java8-set-default -y
+sudo apt install -y git cmake oracle-java8-installer oracle-java8-set-default
 
 # install tools
-sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus android-studio pycharm-professional intellij-idea-ultimate atom golang-go unity-tweak-tool
+sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus atom golang-go unity-tweak-tool
+sudo apt install -y android-studio
+sudo apt install -y pycharm-professional
+sudo apt install -y intellij-idea-ultimate
 sudo apt install -y paper-gtk-theme paper-icon-theme keepassxc libsecret-tools telegram
 
 # set up development environment
