@@ -59,4 +59,7 @@ sudo dpkg -i *.deb
 rm *.deb
 
 sudo apt install -f -y
+sudo apt update
+sudo apt upgrade -y
 sudo apt autoremove -y
+timedatectl set-local-rtc true
