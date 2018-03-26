@@ -1,2 +1,2 @@
 # personal_scripts
-a collection of my personal scripts for automation several things
+a collection of my personal scripts for automating linux setups
