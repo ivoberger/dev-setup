@@ -1,14 +1,12 @@
-curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-curl -O https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub
-sudo dpkg -i cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
-sudo apt-key add 7fa2af80.pub
+curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.1.85-1_amd64.deb
 
 sudo apt update
-sudo apt install -y python-dev python3-dev python-numpy python3-numpy build-essential python-pip python3-pip python-virtualenv swig python-wheel libcurl3-dev cuda=8.0.61-1
+sudo apt install -y python-pip python3-pip cuda-9-0
 
 # install cudNN
-wget https://s3.amazonaws.com/personal-waf/cudnn-8.0-linux-x64-v5.1.tgz
-sudo tar -xzvf cudnn-8.0-linux-x64-v5.1.tgz
+cp files/cudnn-9.0-linux-x64-v7.tgz /tmp
+cd /tamp
+sudo tar -xzvf cudnn-9.0-linux-x64-v7.tgz
 sudo cp cuda/include/cudnn.h /usr/local/cuda/include
 sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
 sudo chmod a+r /usr/local/cuda/include/cudnn.h /usr/local/cuda/lib64/libcudnn*
@@ -17,4 +15,5 @@ echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/
 echo 'export CUDA_HOME=/usr/local/cuda' >> ~/.bashrc
 
 source ~/.bashrc
-sudo -H pip3 install tensorflow-gpu
+sudo -H pip3 install tensorflow-gpu keras
+sudo -H pip2 install tensorflow-gpu keras
