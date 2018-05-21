@@ -11,12 +11,17 @@ sudo add-apt-repository ppa:snwh/pulp -y
 sudo add-apt-repository ppa:phoerious/keepassxc -y
 sudo add-apt-repository ppa:atareao/telegram -y
 sudo add-apt-repository ppa:ubuntuhandbook1/apps -y
+sudo add-apt-repository ppa:pbek/qownnotes -y
+sudo add-apt-repository ppa:maarten-fonville/android-studio -y
+sudo add-apt-repository ppa:git-core/ppa -y
 
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
-sudo sh -c "echo 'deb http://ppa.launchpad.net/viktor-krivak/pycharm/ubuntu zesty main' > /etc/apt/sources.list.d/viktor-krivak-ubuntu-pycharm-xenial.list"
+sudo sh -c 'deb [arch=amd64] https://repo.skype.com/deb stable main" > /etc/apt/sources/list.d/skype-stable.list'
+sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64 /" > /etc/apt/sources/list.d/cuda.list'
+sudo sh -c 'deb https://desktop-download.mendeley.com/download/apt stable main" > /etc/apt/sources/list.d/mendeleydesktop.list'
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 
 sudo apt update
 
@@ -25,13 +30,14 @@ sudo apt remove -y apport thunderbird*
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
-sudo apt install -y git cmake oracle-java9-installer oracle-java9-set-default
+sudo apt install -y git git-lfs cmake oracle-java9-installer oracle-java9-set-default
 
 # install tools
-sudo apt install -y vlc grub-customizer texlive-full texmaker evolution evolution-ews libreoffice yakuake nextcloud-client-nautilus code
-sudo apt install -y intellij-idea-ultimate
-sudo apt install -y gnome-tweak-tool keepassxc libsecret-tools telegram
+sudo apt install -y vlc grub-customizer texlive-full evolution evolution-ews libreoffice yakuake konsole nextcloud-client-nautilus code
+sudo apt install -y gnome-tweak-tool keepassxc libsecret-tools telegram qownnotes htop gimp gparted linphone dconf-editor mendeley skypeforlinux
 sudo apt install -y network-manager-openconnect-gnome network-manager-openvpn-gnome network-manager-pptp-gnome network-manager-ssh-gnome network-manager-l2tp-gnome network-manager-iodine-gnome network-manager-vpnc-gnome
+
+sudo apt install -y libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 android-studio code
 
 # set up development environment
 #golang Setup
@@ -51,9 +57,8 @@ if ! grep -qxF "$LINE" "$FILE"; then
 fi
 
 cd /tmp
-wget https://binaries.symless.com/v2.0.4/synergy_2.0.4.stable~b1205%2Bfcb59be4_amd64.deb
+wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
 wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
-wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.17.11-stable_amd64.deb
 sudo dpkg -i *.deb
 rm *.deb
 
@@ -62,6 +67,4 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo snap install --classic go
-sudo snap install --classic android-studio
-sudo snap install --classic pycharm-professional
 timedatectl set-local-rtc true
