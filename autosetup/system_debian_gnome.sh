@@ -70,6 +70,7 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo snap install --classic go
+sudo snap install slack
 timedatectl set-local-rtc true
 
 sudo -H pip3 install --upgrade pip wheel setuptools
