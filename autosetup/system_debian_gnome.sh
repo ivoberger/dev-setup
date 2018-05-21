@@ -23,6 +23,13 @@ sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ub
 sudo sh -c 'deb https://desktop-download.mendeley.com/download/apt stable main" > /etc/apt/sources/list.d/mendeleydesktop.list'
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
 
+cd /tmp
+wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1404/x86_64/nvinfer-runtime-trt-repo-ubuntu1404-3.0.4-ga-cuda9.0_1.0-1_amd64.deb
+wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+sudo dpkg -i *.deb
+rm *.deb
+
 sudo apt update
 
 # upgrade packages
@@ -36,8 +43,10 @@ sudo apt install -y git git-lfs cmake oracle-java9-installer oracle-java9-set-de
 sudo apt install -y vlc grub-customizer texlive-full evolution evolution-ews libreoffice yakuake konsole nextcloud-client-nautilus code
 sudo apt install -y gnome-tweak-tool keepassxc libsecret-tools telegram qownnotes htop gimp gparted linphone dconf-editor mendeley skypeforlinux
 sudo apt install -y network-manager-openconnect-gnome network-manager-openvpn-gnome network-manager-pptp-gnome network-manager-ssh-gnome network-manager-l2tp-gnome network-manager-iodine-gnome network-manager-vpnc-gnome
-
 sudo apt install -y libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 android-studio code
+sudo apt install -y --allow-downgrades cuda-9-0 libnvinfer-dev libcudnn7-dev=7.0.5.15-1+cuda9.0 libcudnn7=7.0.5.15-1+cuda9.0 cuda-command-line-tools python3-pip python3-dev
+sudo apt-mark hold libcudnn7 libcudnn7-dev
+
 
 # set up development environment
 #golang Setup
@@ -56,15 +65,13 @@ if ! grep -qxF "$LINE" "$FILE"; then
   echo 'export PATH=$PATH:$GOPATH/bin' >> $FILE
 fi
 
-cd /tmp
-wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
-wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
-sudo dpkg -i *.deb
-rm *.deb
-
 sudo apt install -f -y
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo snap install --classic go
 timedatectl set-local-rtc true
+
+sudo -H pip3 install --upgrade pip wheel setuptools
+sudo -H pip3 install numpy scipy matplotlib seaborn scikit-learn pandas scikit-pandas h5py tensorflow-gpu tensorboard keras
+sudo -H pip3 install flake8 autopep8 virtualenv
