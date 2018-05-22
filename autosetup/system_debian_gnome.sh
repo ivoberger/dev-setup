@@ -21,8 +21,9 @@ sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda
 
 cd /tmp
 wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.0.176-1_amd64.deb
-#wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.18-stable_amd64.deb
-#wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
+wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.18-stable_amd64.deb
+wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
+wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
 sudo dpkg -i *.deb
 rm *.deb
 
@@ -95,7 +96,6 @@ sudo apt autoremove -y
 sudo snap install --classic go
 sudo snap install --classic slack
 sudo snap install telegram-desktop
-sudo snap install gitkraken
 sudo snap install --classic skype
 
 timedatectl set-local-rtc true
