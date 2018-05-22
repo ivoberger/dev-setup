@@ -1,51 +1,74 @@
 #!/bin/bash
 # Auto Setup Script for Ubuntu Linux Distributions
-
+# Switch to mirrors
+sudo sed -i -e 's/http:\/\/*.archive/mirror:\/\/mirrors/' -e 's/\/ubuntu\//\/mirrors.txt/' /etc/apt/sources.list
+sudo apt update
 # add Repositories
-sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y
-sudo add-apt-repository ppa:ubuntu-lxc/lxd-stable -y
-sudo add-apt-repository ppa:webupd8team/java -y
-sudo add-apt-repository ppa:nilarimogard/webupd8 -y
-sudo add-apt-repository ppa:nextcloud-devs/client -y
-sudo add-apt-repository ppa:snwh/pulp -y
-sudo add-apt-repository ppa:phoerious/keepassxc -y
-sudo add-apt-repository ppa:atareao/telegram -y
-sudo add-apt-repository ppa:ubuntuhandbook1/apps -y
-sudo add-apt-repository ppa:pbek/qownnotes -y
-sudo add-apt-repository ppa:maarten-fonville/android-studio -y
-sudo add-apt-repository ppa:git-core/ppa -y
+sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y -n
+sudo add-apt-repository ppa:webupd8team/java -y -n
+sudo add-apt-repository ppa:nilarimogard/webupd8 -y -n
+sudo add-apt-repository ppa:nextcloud-devs/client -y -n
+sudo add-apt-repository ppa:phoerious/keepassxc -y -n
+sudo add-apt-repository ppa:pbek/qownnotes -y -n
+sudo add-apt-repository ppa:git-core/ppa -y -n
 
+sudo apt install -y curl
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
 sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo sh -c 'deb [arch=amd64] https://repo.skype.com/deb stable main" > /etc/apt/sources/list.d/skype-stable.list'
-sudo sh -c 'echo "deb http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64 /" > /etc/apt/sources/list.d/cuda.list'
-sudo sh -c 'deb https://desktop-download.mendeley.com/download/apt stable main" > /etc/apt/sources/list.d/mendeleydesktop.list'
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/7fa2af80.pub
 
 cd /tmp
-wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1404/x86_64/nvinfer-runtime-trt-repo-ubuntu1404-3.0.4-ga-cuda9.0_1.0-1_amd64.deb
-wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
-wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
+wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1704/x86_64/cuda-repo-ubuntu1704_9.0.176-1_amd64.deb
+#wget https://desktop-download.mendeley.com/download/apt/pool/main/m/mendeleydesktop/mendeleydesktop_1.18-stable_amd64.deb
+#wget https://binaries.symless.com/v2.0.12/ubuntu/synergy_2.0.12.beta~b1677%2B0b61673b_amd64.deb
 sudo dpkg -i *.deb
 rm *.deb
 
 sudo apt update
+sudo apt install -f -y
 
 # upgrade packages
-sudo apt remove -y apport thunderbird*
+sudo apt remove -y apport
 sudo apt upgrade -y
 sudo apt dist-upgrade -y
 
-sudo apt install -y git git-lfs cmake oracle-java9-installer oracle-java9-set-default
+sudo apt install -y git git-lfs cmake
 
 # install tools
-sudo apt install -y vlc grub-customizer texlive-full evolution evolution-ews libreoffice yakuake konsole nextcloud-client-nautilus code
-sudo apt install -y gnome-tweak-tool keepassxc libsecret-tools telegram qownnotes htop gimp gparted linphone dconf-editor mendeley skypeforlinux
-sudo apt install -y network-manager-openconnect-gnome network-manager-openvpn-gnome network-manager-pptp-gnome network-manager-ssh-gnome network-manager-l2tp-gnome network-manager-iodine-gnome network-manager-vpnc-gnome
-sudo apt install -y libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386 android-studio code
-sudo apt install -y --allow-downgrades cuda-9-0 libnvinfer-dev libcudnn7-dev=7.0.5.15-1+cuda9.0 libcudnn7=7.0.5.15-1+cuda9.0 cuda-command-line-tools python3-pip python3-dev
-sudo apt-mark hold libcudnn7 libcudnn7-dev
+sudo apt install -y vlc
+sudo apt install -y grub-customizer
+sudo apt install -y texlive-full
+sudo apt install -y evolution evolution-ews
+sudo apt install -y libreoffice
+sudo apt install -y yakuake konsole
+sudo apt install -y nextcloud-client-nautilus
+# Folder Setup
+mkdir -p ~/Development
+rm -rf ~/Pictures
+rm -rf ~/Music
+rm -rf ~/Videos
+rm -rf ~/Documents
+ln -s /media/$USER/Data/Nextcloud ~/Nextcloud
+ln -s /media/$USER/Data/Nextcloud/Photos ~/Pictures
+ln -s /media/$USER/Data/Nextcloud/Videos ~/Videos
+ln -s /media/$USER/Data/Nextcloud/Music ~/Music
+ln -s /media/$USER/Data/Nextcloud/Documents ~/Documents
+ln -s /media/$USER/Data/Nextcloud/Documents/Studium ~/Studies
+
+sudo apt install -y code
+sudo apt install -y gnome-tweak-tool
+sudo apt install -y keepassxc libsecret-tools
+secret-tool store --label='MainDB' passwords MainDB
+sudo apt install -y qownnotes htop gimp
+sudo apt install -y gparted
+sudo apt install -y linphone
+sudo apt install -y dconf-editor
+sudo apt install -y mendeley
+sudo apt install -y network-manager-openconnect-gnome network-manager-openvpn-gnome network-manager-pptp-gnome network-manager-ssh-gnome network-manager-l2tp-gnome network-manager-iodine-gnome network-manager-vpnc-gnome chrome-gnome-shell
+sudo apt install -y cuda-9-0
+sudo apt install -y python3-pip python3-dev
 
 
 # set up development environment
@@ -70,9 +93,13 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
 sudo snap install --classic go
-sudo snap install slack
+sudo snap install --classic slack
+sudo snap install telegram-desktop
+sudo snap install gitkraken
+sudo snap install --classic skype
+
 timedatectl set-local-rtc true
 
 sudo -H pip3 install --upgrade pip wheel setuptools
-sudo -H pip3 install numpy scipy matplotlib seaborn scikit-learn pandas scikit-pandas h5py tensorflow-gpu tensorboard keras
+sudo -H pip3 install numpy scipy matplotlib seaborn scikit-learn pandas h5py tensorflow-gpu tensorboard keras
 sudo -H pip3 install flake8 autopep8 virtualenv
