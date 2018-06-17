@@ -8,7 +8,6 @@ sudo add-apt-repository ppa:danielrichter2007/grub-customizer -y -n
 sudo add-apt-repository ppa:webupd8team/java -y -n
 sudo add-apt-repository ppa:nilarimogard/webupd8 -y -n
 sudo add-apt-repository ppa:nextcloud-devs/client -y -n
-sudo add-apt-repository ppa:phoerious/keepassxc -y -n
 sudo add-apt-repository ppa:pbek/qownnotes -y -n
 sudo add-apt-repository ppa:git-core/ppa -y -n
 
