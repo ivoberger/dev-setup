@@ -12,6 +12,7 @@ sudo add-apt-repository ppa:nilarimogard/webupd8 -y -n
 sudo add-apt-repository ppa:nextcloud-devs/client -y -n
 sudo add-apt-repository ppa:pbek/qownnotes -y -n
 sudo add-apt-repository ppa:git-core/ppa -y -n
+sudo add-apt-repository ppa:kubuntu-ppa/backports -y -n
 
 sudo apt install -y curl
 curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
@@ -31,7 +32,7 @@ sudo apt install -f -y
 
 # upgrade packages
 sudo apt remove -y apport
-sudo apt upgrade -y
+sudo apt full-upgrade -y
 sudo apt dist-upgrade -y
 
 sudo apt install -y git cmake cifs-tools
