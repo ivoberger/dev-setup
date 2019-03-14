@@ -4,6 +4,7 @@ echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/50-max_user_wat
 echo kernel.unprivileged_userns_clone=1 | sudo tee /etc/sysctl.d/00-local-userns.conf
 echo "auth            optional        pam_gnome_keyring.so" | sudo tee -a /etc/pam.d/sddm
 echo "session         optional        pam_gnome_keyring.so auto_start" | sudo tee -a /etc/pam.d/sddm
+echo "xrandr --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DVI-D-0 --mode 1920x1080 --pos 1920x0 --rotate normal" | sudo tee -a /usr/share/sddm/scripts/Xsetup
 sudo sysctl --system
 # Removing unwanted preinstalled software (manjaro)
 sudo pacman -Rsn --noconfirm konversation samba manjaro-hello manjaro-documentation-en falkon
