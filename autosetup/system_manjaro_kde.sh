@@ -36,7 +36,7 @@ yay -S --noconfirm --needed dart flutter
 sudo chmod a+rw -R /opt/flutter
 flutter config --no-analytics
 ## Misc
-yay -S --noconfirm --needed intellij-idea-ultimate-edition goland visual-studio-code-bin gitkraken docker gitlab-runner google-cloud-sdk notable-bin
+yay -S --noconfirm --needed intellij-idea-ultimate-edition goland visual-studio-code-bin gitkraken docker gitlab-runner google-cloud-sdk notable-bin mpv
 sudo systemctl enable docker
 sudo systemctl start docker
 sudo groupadd docker
