@@ -21,7 +21,7 @@ yay -S --noconfirm --needed brave-beta telegram-desktop-bin nextcloud-client thu
 # Office
 yay -S --noconfirm --needed texmaker texlive-most gimp libreoffice-fresh inkscape cups gutenprint
 # Tools
-yay -S --noconfirm --needed grub-customizer synergy unzip keepassxc gnome-keyring seahorse kio-gdrive
+yay -S --noconfirm --needed grub-customizer synergy unzip keepassxc gnome-keyring seahorse kio-gdrive insomnia
 # Miscellaneous
 yay -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-completion
 yay -S --noconfirm --needed skypeforlinux-stable-bin slack-desktop linphone kpgp plasma-browser-integration
