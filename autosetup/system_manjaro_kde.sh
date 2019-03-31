@@ -23,7 +23,7 @@ yay -S --noconfirm --needed texmaker texlive-most gimp libreoffice-fresh inkscap
 # Tools
 yay -S --noconfirm --needed grub-customizer synergy unzip keepassxc gnome-keyring seahorse kio-gdrive insomnia
 # Miscellaneous
-yay -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-completion
+yay -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-completion bind-tools
 yay -S --noconfirm --needed skypeforlinux-stable-bin slack-desktop linphone kpgp plasma-browser-integration
 # Development
 ## Android
