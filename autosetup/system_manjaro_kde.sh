@@ -27,7 +27,7 @@ yay -S --noconfirm --needed redshift plasma5-applets-redshift-control bash-compl
 yay -S --noconfirm --needed skypeforlinux-stable-bin slack-desktop linphone kpgp plasma-browser-integration
 # Development
 ## Android
-yay -S --noconfirm --needed android-studio android-studio-canary android-sdk android-sdk-build-tools android-emulator android-google-repository android-platform android-sources
+yay -S --noconfirm --needed android-studio android-studio-beta android-sdk android-sdk-build-tools android-emulator-canary android-google-repository android-platform android-sources
 yay -S --noconfirm --needed android-platform-22 android-sources-22
 ## Web
 yay -S --noconfirm --needed nodejs-lts-dubnium yarn
