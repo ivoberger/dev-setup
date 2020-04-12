@@ -1,2 +1,3 @@
-# personal_scripts
-a collection of my personal scripts for automating linux setups
+# Dev Setup
+
+A collection of shell scripts and dotfiles to set-up a new system as painless as possible.
