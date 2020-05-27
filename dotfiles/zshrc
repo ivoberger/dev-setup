@@ -9,9 +9,6 @@ source /etc/zsh_command_not_found
 
 alias code="code-insiders"
 
-export PATH="$PATH:$HOME/Devtools/flutter/bin"
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
-# export GDK_SCALE=2
 
 # Start configuration added by Zim install {{{
 #
