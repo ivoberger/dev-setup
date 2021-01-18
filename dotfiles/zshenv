@@ -8,7 +8,7 @@
 # }}} End configuration added by Zim install
 
 export ANDROID_HOME=$HOME/sdks/android
-export PATH="$PATH:$HOME/sdks/flutter/bin:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools"
+export PATH="$PATH:$HOME/sdks/flutter/bin:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$HOME/.yarn/bin"
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
 # export GDK_SCALE=2
