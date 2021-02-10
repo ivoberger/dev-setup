@@ -1,6 +1,7 @@
 #!/bin/bash
 sudo apt update
-sudo apt install wget curl git unzip zip zsh xz-utils libgbm-dev gnupg software-properties-common
+sudo apt install wget curl git unzip zip zsh xz-utils libgbm-dev gnupg software-properties-common command-not-found
+sudo apt-file update
 
 wget https://release.gitkraken.com/linux/gitkraken-amd64.deb
 sudo dpkg -i ./gitkraken-amd64.deb
@@ -12,7 +13,7 @@ sudo add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 sudo apt update
 sudo apt -y install -f
 sudo apt -y upgrade
-sudo apt -y install rcm build-essential adoptopenjdk-14-openj9 command-not-found
+sudo apt -y install rcm build-essential adoptopenjdk-14-openj9
 sudo apt -y install libglu1-mesa google-cloud-sdk libxss1 libasound2
 sudo chsh --shell=/usr/bin/zsh ivo
 curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
