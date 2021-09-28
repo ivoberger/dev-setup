@@ -36,6 +36,5 @@ zmodule zsh-users/zsh-syntax-highlighting
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 zmodule lukechilds/zsh-nvm
-zmodule zimfw/ssh
 # }}} End configuration added by Zim install
 
