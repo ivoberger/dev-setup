@@ -7,10 +7,15 @@
 : ${ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim}
 # }}} End configuration added by Zim install
 
+export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+export NVM_COMPLETION=true
+export NVM_AUTO_USE=true
+export NVM_LAZY_LOAD=true
+
+
 export ANDROID_HOME=$HOME/sdks/android
 export ANDROID_SDK_ROOT=$ANDROID_HOME
 export PATH="$PATH:$HOME/sdks/flutter/bin:$ANDROID_HOME/cmdline-tools/tools/bin:$ANDROID_HOME/platform-tools:$HOME/.yarn/bin"
-export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 
 export LIBGL_ALWAYS_INDIRECT=1
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0.0
