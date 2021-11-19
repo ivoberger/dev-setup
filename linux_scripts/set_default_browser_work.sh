@@ -1,2 +1,3 @@
 #!/bin/bash
-xdg-mime default google-chrome.desktop text/html x-scheme-handler/http x-scheme-handler/https
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+$SCRIPT_DIR/set_default_browser.sh google-chrome.desktop
