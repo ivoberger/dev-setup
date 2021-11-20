@@ -21,13 +21,13 @@ yay -S --noconfirm --needed plasma-wayland-session powerdevil-ddcutil
 
 # Theming
 yay -S --noconfirm --needed kvantum-qt5 fluent-kde-theme-git fluent-gtk-theme-git fluent-icon-theme-git nerd-fonts-meslo ttf-joypixels latte-dock
-yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome notion-app telegram-desktop signal-desktop
+yay -S --noconfirm --needed microsoft-edge-stable-bin google-chrome notion-app telegram-desktop signal-desktop nextcloud-client
 
 # Tools
 yay -S --noconfirm --needed unzip keepassxc gnome-keyring seahorse rcm zsh zsh-completions
 
 # Flatpak setup
-flatpak install --noninteractive -y flathub com.discordapp.Discord org.signal.Signal com.slack.Slack org.nextcloud.Nextcloud
+flatpak install --noninteractive -y flathub com.discordapp.Discord com.slack.Slack
 
 # Development
 yay -S --noconfirm --needed yarn httpie google-cloud-sdk docker
