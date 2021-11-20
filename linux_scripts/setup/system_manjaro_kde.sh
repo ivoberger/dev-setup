@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 # Config
 echo fs.inotify.max_user_watches=524288 | sudo tee /etc/sysctl.d/50-max_user_watches.conf
 echo kernel.unprivileged_userns_clone=1 | sudo tee /etc/sysctl.d/00-local-userns.conf
@@ -39,7 +40,11 @@ sudo usermod -aG docker $USER
 yay -Qdt 
 yay -c --noconfirm
 
-./linux_scripts/fix_emojis.sh
+$SCRIPT_DIR/../fixes/fix_emojis.sh
+$SCRIPT_DIR/kde/browser.sh
+$SCRIPT_DIR/all/ssh_agent.sh
+$SCRIPT_DIR/kde/ssh_auth.sh
+$SCRIPT_DIR/kde/keepassxc_unlock.sh
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
-rcup -d dotfiles -f
+rcup -d $SCRIPT_DIR/../../dotfiles -f
