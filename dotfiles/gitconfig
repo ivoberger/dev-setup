@@ -1,3 +1,5 @@
 [user]
 	email = ivo@ivoberger.com
 	name = Ivo Berger
+[pull]
+	rebase = true
