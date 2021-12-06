@@ -67,7 +67,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 unset BROWSER
 
 # Configure ssh forwarding
-if command -v piperelay.exe >/dev/null 2>&1; then
+if command -v npiperelay.exe >/dev/null 2>&1; then
   # need `ps -ww` to get non-truncated command for matching
   # use square brackets to generate a regex match for the process we want but that doesn't match the grep command running it!
   ALREADY_RUNNING=$(ps -auxww | grep -q "[n]piperelay.exe -ei -s //./pipe/openssh-ssh-agent"; echo $?)
@@ -84,6 +84,7 @@ fi
 
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
+z4h source ~/.local.env.zsh
 
 # Use additional Git repositories pulled in with `z4h install`.
 z4h load   lukechilds/zsh-nvm 
