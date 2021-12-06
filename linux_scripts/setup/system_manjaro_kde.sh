@@ -46,5 +46,5 @@ $SCRIPT_DIR/all/ssh_agent.sh
 $SCRIPT_DIR/kde/ssh_auth.sh
 $SCRIPT_DIR/kde/keepassxc_unlock.sh
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)"
 rcup -d $SCRIPT_DIR/../../dotfiles -f
+zsh; exit;
