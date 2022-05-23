@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt update
-sudo apt install -y wget curl git unzip zip zsh xz-utils libgbm-dev gnupg software-properties-common command-not-found socat
+sudo apt install -y wget curl git unzip zip zsh xz-utils gnupg software-properties-common command-not-found socat
 sudo apt-file update
 
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
