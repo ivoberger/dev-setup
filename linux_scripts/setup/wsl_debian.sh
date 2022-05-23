@@ -1,5 +1,5 @@
 #!/bin/bash
-sudo apt-get update
+sudo apt-get -yqq update
 sudo apt-get install -yqq wget curl git unzip zip zsh xz-utils gnupg software-properties-common command-not-found socat apt-transport-https ca-certificates
 sudo apt-file update
 
