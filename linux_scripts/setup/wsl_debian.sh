@@ -9,8 +9,7 @@ sudo apt update
 sudo apt -y install -f
 sudo apt -y upgrade
 sudo apt -y install rcm build-essential
-sudo apt -y install google-cloud-sdk
-sudo chsh --shell=/usr/bin/zsh ivo
+sudo chsh --shell=/usr/bin/zsh $USER
 
 rcup -d dotfiles -f
 zsh; exit;
