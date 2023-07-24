@@ -49,7 +49,7 @@ zstyle ':z4h:' term-shell-integration 'yes'
 # This doesn't do anything apart from cloning the repository and keeping it
 # up-to-date. Cloned files can be used after `z4h init`. This is just an
 # example. If you don't plan to use Oh My Zsh, delete this line.
-z4h install lukechilds/zsh-nvm || return
+z4h install dominik-schwabe/zsh-fnm || return
 z4h install lukechilds/zsh-better-npm-completion || return
 z4h install lukechilds/zsh-better-npm-completion || return
 
@@ -102,7 +102,7 @@ z4h source ~/.env.zsh
 z4h source ~/.local.env.zsh
 
 # Use additional Git repositories pulled in with `z4h install`.
-z4h load   lukechilds/zsh-nvm
+z4h load   dominik-schwabe/zsh-fnm
 z4h load   lukechilds/zsh-better-npm-completion
 
 # Define key bindings.
