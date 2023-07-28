@@ -129,6 +129,11 @@ compdef _directories md
 
 # Define aliases.
 alias tree='tree -a -I .git'
+alias gco='gclean origin'
+alias gpr='git pull --rebase'
+alias gpf='git push --force-with-lease'
+alias gr='git rebase'
+alias grd='git rebase development'
 
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
