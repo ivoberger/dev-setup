@@ -130,8 +130,13 @@ function adb_forward() {
 # Define aliases.
 alias tree='tree -a -I .git'
 alias gco='git_clean origin'
+alias gc='git commit'
+alias gca='git commit --amend --no-edit'
+alias gcae='git commit --amend'
+alias gcaa='git commit --amend --no-edit --all'
 alias gpr='git pull --rebase'
 alias gpf='git push --force-with-lease'
+alias gcaapf='git commit --amend --no-edit --all && git push --force-with-lease'
 alias gr='git rebase'
 alias grd='git rebase development'
 alias gcd='git checkout development'
