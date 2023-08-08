@@ -10,6 +10,6 @@ sudo apt-get -yqq install rcm build-essential
 sudo chsh --shell=/usr/bin/zsh $USER
 
 rcup -d dotfiles -f
-zsh -c "nvm install --lts"
-zsh -c "npm i -g npm pnpm yarn"
+zsh -c "fnm install --lts"
+zsh -c "corepack enable"
 zsh; exit;
