@@ -142,6 +142,8 @@ alias grd='git rebase development'
 alias gcd='git checkout development'
 alias grh1='git reset --soft HEAD~1'
 
+alias node='bun'
+
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
 
