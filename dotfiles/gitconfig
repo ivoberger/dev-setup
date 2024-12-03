@@ -3,3 +3,5 @@
 	name = Ivo Berger
 [pull]
 	rebase = true
+[push]
+	autoSetupRemote = true

@@ -72,7 +72,7 @@ unset BROWSER
 
 # WSL?
 if [[ "$(< /proc/sys/kernel/osrelease)" == *microsoft* ]]; then
-    export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')   
+    export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
     export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
     unset ADB_SERVER_SOCKET
 
@@ -131,6 +131,7 @@ function adb_forward() {
 alias tree='tree -a -I .git'
 alias gco='git_clean origin'
 alias gc='git commit'
+alias gcm='git commit -a --message'
 alias gca='git commit --amend --no-edit'
 alias gcae='git commit --amend'
 alias gcaa='git commit --amend --no-edit --all'
@@ -158,3 +159,4 @@ setopt no_auto_menu  # require an extra TAB press to open the completion menu
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH=$HOME/.local/bin:$PATH
