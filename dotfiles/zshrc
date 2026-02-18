@@ -136,6 +136,10 @@ unset BROWSER
 bindkey '^H' backward-kill-word        # Ctrl+Backspace / Ctrl+H
 bindkey '^[^?' backward-kill-word      # Ctrl+Alt+Backspace
 
+# History substring search (Up/Down after typing)
+bindkey '^[[A' history-substring-search-up    # Up arrow
+bindkey '^[[B' history-substring-search-down  # Down arrow
+
 # Undo/redo
 bindkey '^/' undo                      # Ctrl+/
 bindkey '^[/' redo                     # Alt+/

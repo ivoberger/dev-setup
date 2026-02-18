@@ -12,3 +12,12 @@ dominik-schwabe/zsh-fnm
 
 # Better npm tab completion
 lukechilds/zsh-better-npm-completion
+
+# Additional completions for many tools
+zsh-users/zsh-completions
+
+# History substring search (type + Up/Down to search history)
+zsh-users/zsh-history-substring-search
+
+# Safe rm (prevents dangerous deletes)
+mattmc3/zsh-safe-rm
