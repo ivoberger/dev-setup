@@ -70,26 +70,6 @@ export NVM_AUTO_USE=true
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 unset BROWSER
 
-# WSL?
-if [[ "$(< /proc/sys/kernel/osrelease)" == *microsoft* ]]; then
-    export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
-    export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
-    unset ADB_SERVER_SOCKET
-
-    # need `ps -ww` to get non-truncated command for matching
-    # use square brackets to generate a regex match for the process we want but that doesn't match the grep command running it!
-    ALREADY_RUNNING=$(ps -auxww | grep -q "[n]piperelay.exe -ei -s //./pipe/openssh-ssh-agent"; echo $?)
-    if [[ $ALREADY_RUNNING != "0" ]]; then
-        if [[ -S $SSH_AUTH_SOCK ]]; then
-            # not expecting the socket to exist as the forwarding command isn't running (http://www.tldp.org/LDP/abs/html/fto.html)
-            rm $SSH_AUTH_SOCK
-        fi
-        # setsid to force new session to keep running
-        # set socat to listen on $SSH_AUTH_SOCK and forward to npiperelay which then forwards to openssh-ssh-agent on windows
-        (setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
-    fi
-fi
-
 # Source additional local files if they exist.
 z4h source ~/.env.zsh
 z4h source ~/.local.env.zsh
@@ -124,9 +104,6 @@ function adb_forward() {
     socat -d -d TCP-LISTEN:5037,reuseaddr,fork TCP:$(cat /etc/resolv.conf | tail -n1 | cut -d " " -f 2):5037
 }
 
-# Define named directories: ~w <=> Windows home directory on WSL.
-[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
-
 # Define aliases.
 alias tree='tree -a -I .git'
 alias gco='git_clean origin'
@@ -143,7 +120,7 @@ alias grd='git rebase development'
 alias gcd='git checkout development'
 alias grh1='git reset --soft HEAD~1'
 
-alias node='bun'
+alias pamper='gco && gpr && yarn'
 
 # Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
