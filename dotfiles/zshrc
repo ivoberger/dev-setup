@@ -1,110 +1,161 @@
-# Personal Zsh configuration file. It is strongly recommended to keep all
-# shell customization and configuration (including exported environment
-# variables such as PATH) in this file or in files source by it.
-#
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+# --- Early PATH setup (needed before install checks) ---
+export PATH="$HOME/.local/bin:$HOME/.fzf/bin:$PATH"
 
-zstyle ':z4h:' start-tmux 'no'
+# --- Auto-install missing dependencies ---
+function _ensure_installed() {
+  local name="$1" check_cmd="$2" install_cmd="$3"
+  if ! command -v "$check_cmd" &>/dev/null; then
+    echo "[$name] not found."
+    echo -n "Install $name? [Y/n] "
+    read -r answer
+    if [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]; then
+      eval "$install_cmd"
+    else
+      echo "Skipping $name. Some features may not work."
+    fi
+  fi
+}
 
-# Periodic auto-update on Zsh startup: 'ask' or 'no'.
-# You can manually run `z4h update` to update everything.
-zstyle ':z4h:' auto-update      'yes'
-# Ask whether to auto-update this often; has no effect if auto-update is 'no'.``
-zstyle ':z4h:' auto-update-days '28'
+_ensure_installed "starship" "starship" \
+  'curl -sS https://starship.rs/install.sh | sh -s -- -y'
 
-# Move prompt to the bottom when zsh starts and on Ctrl+L.
-zstyle ':z4h:' prompt-at-bottom 'no'
+# Add fzf to PATH if installed via git clone
 
-# Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey' keyboard  'pc'
+_ensure_installed "fzf" "fzf" \
+  'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --all --no-bash --no-fish'
 
-# Right-arrow key accepts one character ('partial-accept') from
-# command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char 'accept'
+_ensure_installed "direnv" "direnv" \
+  'curl -sfL https://direnv.net/install.sh | bash'
 
-# Recursively traverse directories when TAB-completing files.
-zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+_ensure_installed "zoxide" "zoxide" \
+  'curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh'
 
-# Enable direnv to automatically source .envrc files.
-zstyle ':z4h:direnv'         enable 'yes'
-# Show "loading" and "unloading" notifications from direnv.
-zstyle ':z4h:direnv:success' notify 'yes'
+unfunction _ensure_installed
 
-# Enable ('yes') or disable ('no') automatic teleportation of z4h over
-# ssh when connecting to these hosts.
-# zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
-# zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
-# The default value if none of the overrides above match the hostname.
-zstyle ':z4h:ssh:*'                   enable 'no'
+# --- Auto-update check (every 28 days) ---
+_UPDATE_STAMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh_update_stamp"
+_UPDATE_INTERVAL=$((28 * 24 * 60 * 60))
 
-# Send these files over to the remote host when connecting over ssh to the
-# enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
+function _check_updates() {
+  local now=$(date +%s)
+  local last_update=0
 
-# Mark up shell's output with semantic information.
-zstyle ':z4h:' term-shell-integration 'yes'
+  if [[ -f "$_UPDATE_STAMP" ]]; then
+    last_update=$(cat "$_UPDATE_STAMP")
+  fi
 
-# Clone additional Git repositories from GitHub.
-#
-# This doesn't do anything apart from cloning the repository and keeping it
-# up-to-date. Cloned files can be used after `z4h init`. This is just an
-# example. If you don't plan to use Oh My Zsh, delete this line.
-z4h install dominik-schwabe/zsh-fnm || return
-z4h install lukechilds/zsh-better-npm-completion || return
-z4h install lukechilds/zsh-better-npm-completion || return
+  if (( now - last_update > _UPDATE_INTERVAL )); then
+    echo "It's been a while since your shell tools were updated."
+    echo -n "Run updates now? [Y/n] "
+    read -r answer
+    if [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]; then
+      echo "Updating antidote plugins..."
+      antidote update
 
-# Install or update core components (fzf, zsh-autosuggestions, etc.) and
-# initialize Zsh. After this point console I/O is unavailable until Zsh
-# is fully initialized. Everything that requires user interaction or can
-# perform network I/O must be done above. Everything else is best done below.
-z4h init || return
+      if command -v starship &>/dev/null; then
+        echo "Updating starship..."
+        curl -sS https://starship.rs/install.sh | sh -s -- -y
+      fi
 
+      if [[ -d ~/.fzf ]]; then
+        echo "Updating fzf..."
+        (cd ~/.fzf && git pull && ./install --all --no-bash --no-fish)
+      fi
 
-# Extend PATH.
+      if command -v direnv &>/dev/null; then
+        echo "Updating direnv..."
+        curl -sfL https://direnv.net/install.sh | bash
+      fi
+
+      if command -v zoxide &>/dev/null; then
+        echo "Updating zoxide..."
+        curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
+      fi
+
+      echo "$now" > "$_UPDATE_STAMP"
+      echo "All updates complete."
+    else
+      # Snooze for another 28 days
+      echo "$now" > "$_UPDATE_STAMP"
+    fi
+  fi
+}
+
+_check_updates
+unfunction _check_updates
+
+# --- Source local config (before compinit so local fpath entries are picked up) ---
+[[ -f ~/.env.zsh ]] && source ~/.env.zsh
+[[ -f ~/.local.env.zsh ]] && source ~/.local.env.zsh
+
+# --- Completion (must be before antidote load) ---
+autoload -Uz compinit && compinit
+
+# --- Antidote plugin manager ---
+# Bootstrap antidote if not installed
+ANTIDOTE_HOME="${ZDOTDIR:-$HOME}/.antidote"
+if [[ ! -d "$ANTIDOTE_HOME" ]]; then
+  git clone --depth=1 https://github.com/mattmc3/antidote.git "$ANTIDOTE_HOME"
+fi
+source "$ANTIDOTE_HOME"/antidote.zsh
+
+# Load plugins from ~/.zsh_plugins.txt
+antidote load
+
+# --- Prompt ---
+eval "$(starship init zsh)"
+
+# --- fzf ---
+if command -v fzf &>/dev/null; then
+  if [[ $(fzf --version | cut -d. -f1-2 | tr -d .) -ge 048 ]]; then
+    eval "$(fzf --zsh)"
+  else
+    # Older fzf: source scripts directly
+    [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+  fi
+fi
+
+# --- direnv ---
+eval "$(direnv hook zsh)" 2>/dev/null
+
+# --- zoxide ---
+eval "$(zoxide init zsh)" 2>/dev/null
+
+# --- PATH ---
 path=(~/bin ~/.yarn/bin $path)
 
-# Export environment variables.
+# --- Environment ---
 export GPG_TTY=$TTY
 export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 unset BROWSER
 
-# Source additional local files if they exist.
-z4h source ~/.env.zsh
-z4h source ~/.local.env.zsh
+# --- Key bindings ---
+# Backward kill word
+bindkey '^H' backward-kill-word        # Ctrl+Backspace / Ctrl+H
+bindkey '^[^?' backward-kill-word      # Ctrl+Alt+Backspace
 
-# Use additional Git repositories pulled in with `z4h install`.
-z4h load   dominik-schwabe/zsh-fnm
-z4h load   lukechilds/zsh-better-npm-completion
+# Undo/redo
+bindkey '^/' undo                      # Ctrl+/
+bindkey '^[/' redo                     # Alt+/
 
-# Define key bindings.
-z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
-z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
-
-z4h bindkey undo Ctrl+/  # undo the last command line change
-z4h bindkey redo Alt+/   # redo the last undone command line change
-
-z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
-z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
-z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
-z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
-
-# Autoload functions.
+# --- Autoload ---
 autoload -Uz zmv
 
-# Define functions and completions.
+# --- Functions ---
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
 function git_clean() {
-    git fetch $1 -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done;
-}
-function adb_forward() {
-    socat -d -d TCP-LISTEN:5037,reuseaddr,fork TCP:$(cat /etc/resolv.conf | tail -n1 | cut -d " " -f 2):5037
+  git fetch $1 -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done
 }
 
-# Define aliases.
+function adb_forward() {
+  socat -d -d TCP-LISTEN:5037,reuseaddr,fork TCP:$(cat /etc/resolv.conf | tail -n1 | cut -d " " -f 2):5037
+}
+
+# --- Aliases ---
 alias tree='tree -a -I .git'
 alias gco='git_clean origin'
 alias gc='git commit'
@@ -119,21 +170,14 @@ alias gr='git rebase'
 alias grd='git rebase development'
 alias gcd='git checkout development'
 alias grh1='git reset --soft HEAD~1'
-
 alias pamper='gco && gpr && yarn'
-
-# Add flags to existing aliases.
 alias ls="${aliases[ls]:-ls} -A"
 
-# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+# --- Shell options ---
 setopt glob_dots     # no special treatment for file names with a leading dot
 setopt no_auto_menu  # require an extra TAB press to open the completion menu
 
-
-# bun completions
-[ -s "/home/ivo/.bun/_bun" ] && source "/home/ivo/.bun/_bun"
-
-# bun
+# --- Bun ---
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-export PATH=$HOME/.local/bin:$PATH

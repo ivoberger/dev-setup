@@ -1,0 +1,14 @@
+# Plugins managed by antidote (https://getantidote.github.io)
+# One plugin per line, GitHub shorthand or full URL
+
+# Autosuggestions (fish-like suggestions as you type)
+zsh-users/zsh-autosuggestions
+
+# Syntax highlighting (colors for valid/invalid commands)
+zsh-users/zsh-syntax-highlighting
+
+# fnm (fast node manager) integration
+dominik-schwabe/zsh-fnm
+
+# Better npm tab completion
+lukechilds/zsh-better-npm-completion
