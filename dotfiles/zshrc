@@ -1,36 +1,5 @@
-# --- Early PATH setup (needed before install checks) ---
+# --- Early PATH setup ---
 export PATH="$HOME/.local/bin:$HOME/.fzf/bin:$PATH"
-
-# --- Auto-install missing dependencies ---
-function _ensure_installed() {
-  local name="$1" check_cmd="$2" install_cmd="$3"
-  if ! command -v "$check_cmd" &>/dev/null; then
-    echo "[$name] not found."
-    echo -n "Install $name? [Y/n] "
-    read -r answer
-    if [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]; then
-      eval "$install_cmd"
-    else
-      echo "Skipping $name. Some features may not work."
-    fi
-  fi
-}
-
-_ensure_installed "starship" "starship" \
-  'curl -sS https://starship.rs/install.sh | sh -s -- -y'
-
-# Add fzf to PATH if installed via git clone
-
-_ensure_installed "fzf" "fzf" \
-  'git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install --all --no-bash --no-fish'
-
-_ensure_installed "direnv" "direnv" \
-  'curl -sfL https://direnv.net/install.sh | bash'
-
-_ensure_installed "zoxide" "zoxide" \
-  'curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh'
-
-unfunction _ensure_installed
 
 # --- Auto-update check (every 28 days) ---
 _UPDATE_STAMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh_update_stamp"
