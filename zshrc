@@ -14,37 +14,15 @@ function _check_updates() {
   fi
 
   if (( now - last_update > _UPDATE_INTERVAL )); then
-    echo "It's been a while since your shell tools were updated."
+    echo "It's been a while since your shell plugins were updated."
     echo -n "Run updates now? [Y/n] "
     read -r answer
     if [[ -z "$answer" || "$answer" =~ ^[Yy]$ ]]; then
       echo "Updating antidote plugins..."
       antidote update
-
-      if command -v starship &>/dev/null; then
-        echo "Updating starship..."
-        curl -sS https://starship.rs/install.sh | sh -s -- -y
-      fi
-
-      if [[ -d ~/.fzf ]]; then
-        echo "Updating fzf..."
-        (cd ~/.fzf && git pull && ./install --all --no-bash --no-fish)
-      fi
-
-      if command -v direnv &>/dev/null; then
-        echo "Updating direnv..."
-        curl -sfL https://direnv.net/install.sh | bash
-      fi
-
-      if command -v zoxide &>/dev/null; then
-        echo "Updating zoxide..."
-        curl -sSf https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
-      fi
-
       echo "$now" > "$_UPDATE_STAMP"
       echo "All updates complete."
     else
-      # Snooze for another 28 days
       echo "$now" > "$_UPDATE_STAMP"
     fi
   fi
@@ -97,7 +75,7 @@ path=(~/bin ~/.yarn/bin $path)
 export GPG_TTY=$TTY
 export NVM_COMPLETION=true
 export NVM_AUTO_USE=true
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+[[ "$(uname)" == "Linux" ]] && export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 unset BROWSER
 
 # --- Key bindings ---
@@ -120,30 +98,8 @@ autoload -Uz zmv
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
-function git_clean() {
-  git fetch $1 -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == "[gone]" {sub("refs/heads/", "", $1); print $1}'); do git branch -D $branch; done
-}
-
-function adb_forward() {
-  socat -d -d TCP-LISTEN:5037,reuseaddr,fork TCP:$(cat /etc/resolv.conf | tail -n1 | cut -d " " -f 2):5037
-}
-
 # --- Aliases ---
 alias tree='tree -a -I .git'
-alias gco='git_clean origin'
-alias gc='git commit'
-alias gcm='git commit -a --message'
-alias gca='git commit --amend --no-edit'
-alias gcae='git commit --amend'
-alias gcaa='git commit --amend --no-edit --all'
-alias gpr='git pull --rebase'
-alias gpf='git push --force-with-lease'
-alias gcaapf='git commit --amend --no-edit --all && git push --force-with-lease'
-alias gr='git rebase'
-alias grd='git rebase development'
-alias gcd='git checkout development'
-alias grh1='git reset --soft HEAD~1'
-alias pamper='gco && gpr && yarn'
 alias ls="${aliases[ls]:-ls} -A"
 
 # --- Shell options ---

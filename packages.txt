@@ -1,0 +1,26 @@
+# Shared package list — one package per line
+# Format: <package>  <platform>
+# Platform: both | mac | linux
+# Mac packages installed via brew, Linux via paru (AUR-compatible)
+# Note: some packages have different names per platform — see overrides below
+
+# Shell
+starship        both
+zsh             both
+
+# CLI essentials
+fzf             both
+direnv          both
+zoxide          both
+ripgrep         both
+fd              both
+bat             both
+eza             both
+jq              both
+gh              mac
+github-cli      linux
+
+# Linux only
+keyd            linux
+docker          linux
+ttf-joypixels   linux

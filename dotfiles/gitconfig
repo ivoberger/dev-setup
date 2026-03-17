@@ -1,7 +1,0 @@
-[user]
-	email = github@relay.ivoberger.com
-	name = Ivo Berger
-[pull]
-	rebase = true
-[push]
-	autoSetupRemote = true

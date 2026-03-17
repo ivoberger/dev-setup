@@ -1,0 +1,21 @@
+[user]
+	email = github@relay.ivoberger.com
+	name = Ivo Berger
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true
+[alias]
+	co = "!git fetch origin -p && for branch in $(git for-each-ref --format '%(refname) %(upstream:track)' refs/heads | awk '$2 == \"[gone]\" {sub(\"refs/heads/\", \"\", $1); print $1}'); do git branch -D $branch; done"
+	cm = commit -a --message
+	ca = commit --amend --no-edit
+	cae = commit --amend
+	caa = commit --amend --no-edit --all
+	pr = pull --rebase
+	pf = push --force-with-lease
+	caapf = "!git commit --amend --no-edit --all && git push --force-with-lease"
+	rb = rebase
+	rbd = rebase development
+	cod = checkout development
+	rh1 = reset --soft HEAD~1
+	pamper = "!git co && git pull --rebase"
